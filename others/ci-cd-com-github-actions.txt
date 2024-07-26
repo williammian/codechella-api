@@ -1,0 +1,104 @@
+CI/CD com GitHub Actions
+
+Existe uma abordagem mais moderna e automatizada para realizar o deploy de nossa aplicação, conhecida como
+CI/CD (Integração Contínua e Entrega Contínua). Uma das ferramentas mais populares atualmente para implementar CI/CD
+é o GitHub Actions, oferecido diretamente pelo GitHub.
+
+CI/CD
+CI/CD é uma prática de desenvolvimento de software que visa automatizar o processo de integração, testes e entrega de
+código em ambientes de produção de forma rápida e confiável. Com CI/CD, as alterações no código são integradas e
+testadas automaticamente, garantindo que apenas o código funcional e testado seja entregue aos usuários finais.
+
+GitHub Actions
+O GitHub Actions oferece uma maneira flexível e integrada de automatizar fluxos de trabalho de desenvolvimento
+diretamente no GitHub. Com ele, podemos configurar pipelines de CI/CD que são acionados automaticamente por eventos
+como push de código, pull requests ou criação de tags. Isso significa que podemos automatizar completamente o
+processo de build, testes e deploy de nossas aplicações.
+
+CI/CD com GitHub Actions e Docker Hub
+Para implementar CI/CD para nossa aplicação Java usando o GitHub Actions, podemos seguir os seguintes passos:
+
+Configurar um Workflow
+
+Crie um arquivo YAML na pasta .github/workflows do seu repositório para definir o fluxo de trabalho do GitHub Actions.
+Este arquivo deve conter as instruções de todo o workflow que desejamos implementar.
+Nome do arquivo: action.yml ou action.yaml
+
+Build e testes
+
+Utilize os comandos necessários para construir a imagem Docker da aplicação e executar os testes automatizados.
+
+Publicação no Docker Hub
+
+Adicione passos ao workflow para fazer o login no Docker Hub e fazer o push da imagem da aplicação.
+
+Deploy
+
+Configure etapas adicionais para se conectar ao seu servidor EC2 e executar o Docker Compose para realizar o
+deploy da nova versão da aplicação.
+
+Com esses passos configurados no GitHub Actions, cada vez que você fizer uma alteração no código e enviar para o
+repositório no GitHub, o GitHub Actions será acionado automaticamente, realizando o build, executando os testes
+automatizados, gerando a imagem docker da aplicação e a publicando no Docker Hub, e, por fim, realizando o
+deploy da aplicação de forma automatizada.
+
+Ao automatizar o processo de CI/CD com o GitHub Actions e o Docker Hub, é possível acelerar significativamente o
+ciclo de desenvolvimento, garantindo assim uma entrega mais ágil e confiável de novas funcionalidades da aplicação.
+
+No caso da aplicação codechella-api, esse seria um exemplo de como configurar todo o processo de deploy dela via
+GitHub Actions:
+
+----------------------------------------------------------------------------------------------------------------------
+
+name: CI/CD with Docker and GitHub Actions
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Build Docker image
+      run: docker build -t williammian/codechella:latest .
+
+    - name: Log into Docker Hub
+      run: docker login -u williammian -p ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Push image to Docker Hub
+      run: docker push williammian/codechella:latest
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    needs: build
+
+    steps:
+    - name: Install SSH key
+      uses: webfactory/ssh-agent@v0.5.3
+      with:
+        ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+    - name: SSH into EC2 instance and update Docker Compose
+      run: |
+        ssh -o StrictHostKeyChecking=no ec2-user@IP_DO_SERVIDOR_EC2 "cd /home/ec2-user && docker-compose pull && docker-compose up -d"
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+No exemplo anterior, teremos o seguinte comportamento:
+
+O fluxo de trabalho é acionado sempre que houver um push na branch main;
+
+O primeiro job, chamado de build, é responsável por construir a imagem Docker, fazer login no Docker Hub
+(usando um token de acesso armazenado em secrets) e fazer push da imagem para o Docker Hub;
+
+O segundo job, chamado de deploy, depende do job build e é responsável por implantar a aplicação no servidor EC2.
+Ele instala uma chave SSH (armazenada em secrets) para acessar o servidor EC2 e, em seguida, executa comandos remotos
+via SSH para atualizar o Docker Compose e reiniciar os contêineres via docker compose.

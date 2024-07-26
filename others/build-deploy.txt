@@ -1,0 +1,23 @@
+Build / Deploy
+
+Build
+
+1) IntelliJ
+Maven -> codechella-api -> Lifecycle -> pachage -> Run Maven Build
+
+jar criado em target -> codechella-api-1.0.jar
+
+
+2) Arquivos
+mvnw (linux / mac)
+mvnw.cmd (windows)
+
+Linha de comando na raiz do projeto
+./mvnw package
+
+---------------------------------------------------------------------
+
+Deploy
+
+java -jar codechella-api-1.0.jar
+

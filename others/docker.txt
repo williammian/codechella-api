@@ -1,0 +1,28 @@
+Criar arquivo Dockerfile na raiz do projeto
+
+-------------------------------------------
+
+Criar imagem da aplicação pelo Docker
+
+docker build -t williammian/codechella:1.0 .
+
+--------------------------------------------
+
+Listar imagens docker
+
+docker image list
+
+-------------------------------------------
+
+Criar arquivos app.env e mysql.env
+
+-------------------------------------------
+
+Criar arquivo docker-compose.yml
+
+-------------------------------------------
+
+Rodar containers
+
+docker compose up --build
+

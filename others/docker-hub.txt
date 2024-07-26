@@ -1,0 +1,61 @@
+Docker Hub
+
+Docker Hub é uma plataforma central para compartilhamento de imagens Docker.
+
+O que é o Docker Hub?
+Docker Hub é um serviço em nuvem que serve como repositório central para imagens Docker.
+Tal serviço permite que as pessoas desenvolvedoras publiquem, compartilhem e gerenciem as imagens Docker de suas
+aplicações de maneira simples. Fazendo uma analogia, é como se o Docker Hub fosse o GitHub, que funciona como um
+serviço para hospedagem de repositórios Git, porém com o propósito de hospedar imagens Docker.
+
+Recursos do Docker Hub
+
+Registro de imagens
+
+O Docker Hub oferece suporte ao armazenamento de imagens tanto públicas quanto privadas.
+As imagens públicas podem ser acessadas e baixadas por qualquer pessoa, enquanto as imagens privadas são restritas às
+pessoas designadas.
+
+Colaboração
+
+As pessoas podem colaborar em projetos compartilhando imagens Docker via Docker Hub. Isso facilita a distribuição de
+software e o trabalho em equipe em diferentes fases do ciclo de vida do desenvolvimento.
+
+Integração com o GitHub
+
+O Docker Hub permite vincular repositórios do GitHub para automatizar a criação e a atualização de imagens Docker a
+partir de Dockerfiles presentes no GitHub. Isso simplifica o processo de integração contínua e entrega contínua (CI/CD)
+para projetos baseados em contêineres.
+
+Automatização de build
+
+É possível configurar builds automatizadas para suas imagens Docker no Docker Hub.
+Isso significa que sempre que houver uma alteração em um repositório vinculado a ela, uma nova imagem será construída
+automaticamente, garantindo que as versões mais recentes estejam sempre disponíveis.
+
+Segurança
+
+O Docker Hub oferece recursos de segurança, incluindo escaneamento de vulnerabilidades em imagens. Isso ajuda na
+identificação de potenciais vulnerabilidades em suas dependências de forma proativa.
+
+Organização
+
+É possível organizar suas imagens em repositórios e tags, facilitando a descoberta e a gestão de versões diferentes
+de uma mesma imagem.
+
+Como o Docker Hub se integra ao fluxo de trabalho?
+
+Publicação
+
+Após criar e testar suas imagens Docker localmente, você pode publicá-las no Docker Hub para que outras pessoas
+possam acessá-las.
+
+Compartilhamento
+
+Ao trabalhar em um projeto, você pode compartilhar imagens Docker via Docker Hub, garantindo que todas as pessoas da
+equipe tenham acesso às versões mais recentes do projeto.
+
+Integração com CI/CD
+
+Configure pipelines de CI/CD para automatizar a construção e implantação de imagens Docker diretamente no Docker Hub,
+garantindo uma entrega contínua eficiente.
