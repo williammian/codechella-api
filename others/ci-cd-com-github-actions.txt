@@ -24,6 +24,8 @@ Crie um arquivo YAML na pasta .github/workflows do seu repositório para definir
 Este arquivo deve conter as instruções de todo o workflow que desejamos implementar.
 Nome do arquivo: action.yml ou action.yaml
 
+OBS: NESTE PROJETO EXEMPLO ESTÁ EM .github1/workflows1/action1.yml (retirar 1)
+
 Build e testes
 
 Utilize os comandos necessários para construir a imagem Docker da aplicação e executar os testes automatizados.
