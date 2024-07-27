@@ -20,6 +20,12 @@ Criar arquivos app.env e mysql.env
 
 Criar arquivo docker-compose.yml
 
+build local
+
+  app:
+    build:
+      context: .
+
 -------------------------------------------
 
 Rodar containers

@@ -1,0 +1,25 @@
+Configurando instância EC2 na AWS
+
+Acesse o Dashboard EC2 da AWS e crie uma instância do tipo Amazon Linux. Lembre-se de fazer o download da
+chave de segurança (arquivo com a extensão .pem) ao criar a nova instância e também de habilitar as opções
+Allow SSH traffic from, Allow HTTPS traffic from the internet e Allow HTTP traffic from the internet
+para que seja possível acessar o servidor via SSH e via browser.
+
+Após criar a instância, acesse a página de lista de instâncias EC2 da AWS e clique na instância recém criada
+para ver os detalhes dela e obter o seu endereço IP público, identificado pelo campo Public IPv4 address.
+
+Abra um terminal em seu computador e copie os arquivos para o servidor via SCP:
+
+scp -i key-pair.pem -r docker-compose.yml env/ ec2-user@IP_EC2:/home/ec2-user
+
+Acesse o servidor via SSH:
+
+ssh -i key-pair.pem ec2-user@IP_EC2
+
+E execute os seguintes comandos para instalar e configurar o Docker e o Docker Compose:
+
+sudo yum update -y && sudo yum install docker -y && sudo usermod -a -G docker ec2-user && sudo service docker start && newgrp docker && sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose && sudo chmod +x /usr/local/bin/docker-compose
+
+Por fim, execute o seguinte comando para inicializar o Docker Compose:
+
+docker-compose up -d
