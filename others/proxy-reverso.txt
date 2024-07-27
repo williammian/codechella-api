@@ -1,0 +1,25 @@
+O que é um proxy?
+
+Um proxy é um intermediário entre um cliente e um servidor, atuando como um gateway que encaminha requisições do cliente
+para o servidor e, em seguida, retorna as respostas do servidor para o cliente. Os proxies são comumente usados para
+várias finalidades, incluindo anonimato na internet, controle de acesso, otimização de performance e segurança.
+
+Quando um cliente envia uma requisição para um servidor por meio de um proxy, o proxy intercepta a requisição e a
+encaminha para o servidor. O servidor, por sua vez, processa a requisição e envia a resposta de volta ao proxy,
+que então a repassa para o cliente. O cliente geralmente não está ciente da presença do proxy e a comunicação entre o
+cliente e o servidor é transparente.
+
+O que é um proxy reverso?
+
+Um proxy reverso é um tipo específico de proxy que opera no lado do servidor, em vez do lado do cliente.
+Em vez de encaminhar requisições de clientes para servidores, um proxy reverso recebe requisições de clientes e as
+encaminha para servidores backend com base em regras de roteamento predefinidas. Depois que o servidor backend processa
+a requisição, o proxy reverso retorna a resposta ao cliente.
+
+Diferenças entre proxy e proxy reverso
+
+A principal diferença entre um proxy comum e um proxy reverso está na direção do tráfego.
+Um proxy convencional encaminha requisições de clientes para servidores, enquanto um proxy reverso recebe requisições
+de clientes e as encaminha para servidores backend. Além disso, os proxies convencionais são geralmente usados para
+finalidades como anonimato na internet e controle de acesso, enquanto os proxies reversos são comumente utilizados para
+balanceamento de carga, cache de conteúdo e segurança.

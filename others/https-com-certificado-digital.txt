@@ -1,0 +1,88 @@
+HTTPS com certificado digital
+
+O que é HTTPS?
+
+O HTTPS (Hypertext Transfer Protocol Secure) é uma extensão do protocolo HTTP que utiliza criptografia para proteger a
+comunicação entre o cliente e o servidor. Isso é feito por meio da utilização de um certificado digital SSL/TLS,
+que autentica o servidor para o cliente e estabelece uma conexão segura.
+
+Como funciona o HTTPS com Certificado Digital?
+
+1-Aquisição do certificado digital
+
+Para habilitar o HTTPS em um servidor, é necessário adquirir um certificado digital SSL/TLS de uma Autoridade
+Certificadora (CA) confiável. Isso geralmente envolve a geração de uma solicitação de assinatura de certificado (CSR)
+e o envio desta solicitação para a CA, que então emite o certificado. É possível obter um certificado digital de
+maneira gratuita, utilizando o serviço Let's Encrypt.
+
+2-Configuração do servidor
+
+Uma vez obtido o certificado digital, ele precisa ser instalado no servidor. Isso geralmente envolve a configuração do
+servidor web (como o Nginx) para utilizar o certificado e habilitar o HTTPS. O certificado digital contém informações
+sobre o domínio, a chave pública do servidor e outras informações necessárias para estabelecer uma comunicação segura.
+
+3-Comunicação Segura
+
+Quando um cliente faz uma requisição HTTPS para o servidor, o servidor responde com seu certificado digital.
+O cliente então verifica o certificado para garantir que ele seja válido e confiável. Em seguida, o cliente e o servidor
+negociam uma chave de sessão segura para criptografar toda a comunicação subsequente.
+
+Implementação do HTTPS no Nginx
+
+Para habilitar o HTTPS no Nginx e configurar o certificado digital, podemos seguir estes passos:
+
+1-Instalação do certificado no Nginx
+
+Configure o Nginx para usar o certificado digital e habilitar o HTTPS. Isso envolve a adição de diretivas de
+configuração no arquivo de configuração do Nginx para especificar o caminho para o certificado e a chave privada.
+
+2-Redirecionamento de HTTP para HTTPS
+
+Adicione uma regra de redirecionamento no Nginx para direcionar automaticamente todas as requisições HTTP para HTTPS,
+garantindo que toda a comunicação seja criptografada.
+
+No caso do projeto utilizado no curso, aqui está um exemplo de como configurar o nginx para utilizar o HTTPS:
+
+---------------------------------------------------------------------------------------------------------------
+
+server {
+    listen 80;
+    server_name app;
+
+    location / {
+        return 301 https://$host$request_uri;
+    }
+}
+
+server {
+    listen 443 ssl;
+    server_name app;
+
+    ssl_certificate /etc/nginx/certificates/certificado.crt;
+    ssl_certificate_key /etc/nginx/certificates/chave.key;
+
+    location / {
+        proxy_pass http://app:8080;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+    }
+}
+
+------------------------------------------------------------------------------------------------------------------
+
+No exemplo anterior, teremos o seguinte comportamento:
+
+O primeiro bloco server redireciona todas as requisições HTTP para HTTPS utilizando um redirecionamento permanente
+(código de status 301);
+
+O segundo bloco server escuta na porta 443 (porta padrão para HTTPS) e configura o certificado SSL/TLS e a
+chave privada para habilitar o HTTPS;
+
+A diretiva proxy_pass, dentro da localização /, continua encaminhando as requisições para a aplicação Java
+que está rodando na porta 8080.
+
+Com o HTTPS habilitado, toda a comunicação entre o cliente e o servidor será segura e criptografada,
+proporcionando maior segurança e privacidade para os usuários. Esta é a recomendação ao se realizar o deploy de uma
+aplicação em um ambiente de produção.

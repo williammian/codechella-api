@@ -1,0 +1,60 @@
+DNS
+
+O que é DNS?
+O DNS é um sistema hierárquico e distribuído que traduz nomes de domínio legíveis por pessoas, como "site.com.br",
+em endereços IP numéricos, como "137.44.2.128". Isso permite que as pessoas acessem sites na internet usando nomes de
+domínio fáceis de lembrar, em vez de terem que memorizar endereços IP complexos.
+
+Como funciona o DNS?
+
+Consulta de Resolução:
+
+Quando você digita um nome de domínio em seu navegador, ele inicia uma consulta de resolução DNS para traduzir esse
+nome de domínio em um endereço IP. Ele começa consultando um servidor DNS local configurado em seu sistema.
+
+Caching e Hierarchy
+
+Se o servidor DNS local não tiver o mapeamento de nome para IP em seu cache, ele encaminha a consulta para servidores
+DNS de nível superior, como servidores raiz, servidores de domínio de nível superior (TLD) e servidores autoritativos,
+seguindo uma hierarquia até encontrar o servidor autoritativo responsável pelo domínio específico.
+
+Resposta e cache
+
+Uma vez que o servidor DNS autoritativo é encontrado, ele responde à consulta com o endereço IP correspondente,
+que é então enviado de volta ao navegador. Além disso, o servidor DNS local armazena o resultado em seu cache para
+consultas futuras, melhorando a eficiência e reduzindo a latência.
+
+Acessando Servidores via DNS
+
+Acessando servidores EC2 da AWS via DNS:
+
+Configuração de registro DNS
+
+Para acessar um servidor EC2 via DNS, é necessário configurar um registro DNS que associe um nome de domínio legível
+por pessoas ao endereço IP público do servidor EC2. Isso pode ser feito através do provedor de registro de domínio ou
+serviço de hospedagem DNS que você estiver utilizando.
+
+Atualização do registro DNS
+
+Uma vez configurado, o registro DNS precisa ser atualizado sempre que o endereço IP público do servidor EC2 for alterado.
+Isso pode ocorrer, por exemplo, ao parar e iniciar a instância EC2, ou se você estiver usando um endereço IP elástico
+(EIP) e o realocar para outra instância.
+
+Acesso por nome de domínio
+
+Depois que o registro DNS estiver configurado e atualizado, você pode acessar seu servidor EC2 usando o nome de
+domínio associado, em vez do endereço IP público. Por exemplo, em vez de digitar "http://137.44.2.128",
+você pode digitar "http://seu-nome-de-domínio.com".
+
+DNS padrão da AWS
+
+Além de configurar um registro DNS personalizado, a AWS fornece automaticamente um nome de domínio público para cada
+instância EC2. Esse nome de domínio segue o padrão ec2-[seu-endereço-ip].compute.amazonaws.com.
+Por exemplo, se o endereço IP público de sua instância EC2 for 137.44.2.128, o nome de domínio público associado
+seria ec2-137-44-2-128.compute.amazonaws.com.
+
+Esse nome de domínio padrão pode ser utilizado para acessar sua instância EC2 via DNS sem a necessidade de configurar
+registros DNS adicionais. No entanto, é importante notar que esse nome de domínio pode não ser tão amigável quanto um
+domínio personalizado e pode ser menos prático para os usuários finais. Portanto, em muitos casos, é preferível
+configurar um registro DNS personalizado para facilitar o acesso à sua instância EC2 por meio de um nome de domínio
+mais fácil de lembrar e usar.
