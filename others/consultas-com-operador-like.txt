@@ -1,0 +1,70 @@
+Consultas com operador like
+
+Algumas consultas SQL feitas pela aplicação podem causar problemas de performance, sendo crucial analisar as queries e
+realizar ajustes, se necessário. Especialmente quando se utiliza frameworks ORM, como o Hibernate e o Spring Data,
+que abstraem bastante o acesso ao banco de dados, gerando automaticamente as queries SQL.
+
+Um exemplo comum de consulta que pode gerar problemas de performance são aquelas que utilizam o operador LIKE para
+filtrar por colunas do tipo VARCHAR. O operador LIKE é utilizado para buscar por padrões em strings, permitindo consultas
+flexíveis, mas pode ser custoso em termos de desempenho quando não utilizado de forma otimizada.
+
+Problemas de performance com o operador LIKE
+
+Consultas que utilizam o operador LIKE podem enfrentar os seguintes problemas de performance:
+
+1. Escaneamento de Tabela Completa
+
+Quando uma consulta utiliza o LIKE, o banco de dados pode ser forçado a realizar um escaneamento completo da tabela para
+buscar todas as linhas que correspondem ao padrão especificado, o que pode ser extremamente lento em tabelas com grande
+volume de dados.
+
+2. Ausência de índices
+
+Consultas com o operador LIKE podem não se beneficiar de índices existentes nas colunas, especialmente quando o padrão de
+busca começa com o caractere coringa %. Isso pode resultar em varreduras de tabela ineficientes.
+
+Otimização de consultas com operador LIKE
+
+Para otimizar consultas que utilizam o operador LIKE, podemos seguir estas práticas:
+
+1. Utilizar prefixo adequado
+
+Sempre que possível, evitar o uso do caractere coringa % no início do padrão de busca. Isso permite que o banco de dados
+utilize índices existentes para acelerar a busca.
+
+2. Usar índices de texto completo
+
+Em bancos de dados que suportam índices de texto completo, considerar a utilização desses índices para consultas que
+envolvem operações de busca de texto.
+
+3. Limitar o escopo da consulta
+
+Quando aplicável, limitar o escopo da consulta utilizando outras cláusulas de filtro para reduzir o número de linhas
+verificadas pelo operador LIKE.
+
+Uma outra alternativa eficaz é criar uma nova coluna no banco de dados que armazena uma versão concatenada das colunas
+que são alvo da pesquisa. Por exemplo, se estivermos buscando por padrões nas colunas nome e email, podemos criar uma
+nova coluna busca_nome_email que contém a concatenação dessas duas colunas:
+
+ALTER TABLE tabela ADD busca_nome_email VARCHAR(255) AS (CONCAT(nome, ' ', email)) STORED;
+
+Após criar essa nova coluna, podemos então criar um índice nela para acelerar as consultas que utilizam o operador LIKE:
+
+CREATE INDEX idx_busca_nome_email ON tabela(busca_nome_email);
+
+Com essa nova coluna e o índice associado, podemos reformular a consulta para buscar diretamente na coluna concatenada,
+aproveitando os benefícios do índice:
+
+SELECT *
+FROM tabela
+WHERE busca_nome_email LIKE '%termo_buscado%';
+
+Essa abordagem pode resultar em ganhos significativos de desempenho, especialmente em tabelas grandes, onde o
+escaneamento completo das colunas originais seria muito custoso em termos de desempenho.
+
+Em alguns casos, pode ser mais eficiente utilizar outras técnicas de busca, como busca textual,
+dependendo dos requisitos da aplicação.
+
+Com essas práticas de otimização, podemos melhorar significativamente o desempenho de consultas SQL que utilizam o
+operador LIKE, garantindo uma melhor experiência para os usuários finais e evitando problemas de escalabilidade em
+aplicações com grande volume de dados.

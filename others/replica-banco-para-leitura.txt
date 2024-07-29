@@ -1,0 +1,57 @@
+Réplica do banco para leitura
+
+Existe uma alternativa comum adicional para melhorar a performance: configurar uma réplica do banco de dados que será
+utilizada exclusivamente para leitura.
+
+O que é uma réplica para leitura?
+
+Uma réplica de banco de dados para leitura, também conhecida como réplica de leitura ou replicação de leitura,
+é uma cópia do banco de dados principal que é configurada especificamente para suportar operações de leitura, ou seja,
+consultas SQL utilizando a cláusula select.
+
+Enquanto o banco de dados principal é responsável por lidar com operações de escrita, como inserções, atualizações e
+exclusões, a réplica de leitura é utilizada apenas para consultas de leitura, aliviando a carga do banco de dados
+principal e melhorando o desempenho geral do sistema.
+
+Cenários de uso
+
+As réplicas de leitura são recomendadas em diversos cenários, incluindo:
+
+1. Aplicações com alto volume de leitura
+
+Em aplicações onde a maioria das operações são de leitura, como blogs, portais de notícias e aplicativos de análise,
+uma réplica de leitura pode distribuir a carga de consultas entre várias réplicas, melhorando o desempenho geral do sistema.
+
+2. Escalabilidade horizontal
+
+Réplicas de leitura permitem escalar horizontalmente a capacidade de leitura do sistema, adicionando réplicas adicionais
+conforme necessário para lidar com aumentos de tráfego e carga.
+
+3. Relatórios e análises
+
+Para aplicações que exigem relatórios e análises em tempo real de grandes conjuntos de dados, réplicas de leitura podem
+fornecer uma fonte dedicada para consultas analíticas sem afetar o desempenho das operações de escrita.
+
+4. Leitura em regiões geográficas distintas
+
+Em aplicações distribuídas globalmente, réplicas de leitura podem ser configuradas em regiões geográficas distintas
+para reduzir a latência e melhorar a experiência do usuário final em diferentes localidades.
+
+Considerações importantes
+
+Ao configurar réplicas de leitura, é importante considerar:
+
+- Sincronização de dados: Assegurar que os dados nas réplicas de leitura estejam sempre sincronizados com o
+banco de dados principal.
+
+- Consistência dos dados: Garantir que as operações de leitura nas réplicas de leitura retornem dados consistentes e
+atualizados.
+
+- Overhead de manutenção: Realizar manutenção regular nas réplicas de leitura, incluindo monitoramento de desempenho,
+aplicação de patches e atualizações, e escalonamento conforme necessário.
+
+- Custo: Avaliar os custos associados à configuração e manutenção de réplicas de leitura, incluindo custos de hardware,
+armazenamento e largura de banda de rede.
+
+Ao considerar esses aspectos, réplicas de leitura podem ser uma excelente ferramenta para melhorar o desempenho e a
+escalabilidade de aplicações baseadas em banco de dados, especialmente em ambientes de alta demanda e volume de dados.

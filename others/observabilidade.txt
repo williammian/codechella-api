@@ -1,0 +1,41 @@
+O que é Observabilidade?
+
+Observabilidade é a capacidade de entender o estado interno de um sistema com base em informações externas.
+Em outras palavras, é a capacidade de observar, medir e entender como um sistema está funcionando internamente,
+especialmente em ambientes de produção, onde a complexidade e as interações são mais difíceis de entender apenas analisando o código.
+
+O que é SRE?
+
+SRE (Site Reliability Engineering) é uma prática que visa criar sistemas altamente confiáveis e escaláveis.
+Desenvolvida pelo Google, a SRE combina princípios de engenharia de software e operações para criar sistemas que são
+fáceis de manter e operar, mesmo em escala global. A observabilidade é um dos pilares fundamentais da prática SRE.
+
+Como Monitorar uma aplicação?
+
+Para monitorar uma aplicação e detectar problemas de performance, podemos seguir estas práticas:
+
+Instrumentação de Código
+
+Adicionar métricas e logs relevantes ao código da aplicação para registrar o desempenho, tempos de resposta, erros e
+outros eventos importantes. Isso pode ser feito usando bibliotecas de monitoramento como o Micrometer ou o SLF4J.
+
+Monitoramento de Infraestrutura
+
+Monitorar a infraestrutura subjacente onde a aplicação está sendo executada, incluindo recursos de hardware
+(CPU, memória, disco) e serviços de infraestrutura (banco de dados, cache, filas).
+Ferramentas como o Prometheus e o Grafana podem ser úteis para isso.
+
+Análise de Logs
+
+Analisar os logs da aplicação e da infraestrutura para identificar padrões, erros e anomalias que possam indicar
+problemas de performance. Ferramentas de análise de logs como o ELK Stack (Elasticsearch, Logstash, Kibana) podem ser
+utilizadas para essa finalidade.
+
+Tracing de Requests
+
+Utilizar o tracing de requests para rastrear o caminho de execução de uma requisição pela aplicação e identificar
+possíveis gargalos e latências. O Jaeger e o Zipkin são ferramentas populares para tracing em aplicações.
+
+Com a observabilidade implementada na aplicação, podemos obter insights valiosos sobre o seu desempenho e
+comportamento em produção, permitindo-nos identificar e resolver problemas de performance de forma proativa,
+garantindo uma melhor experiência para os usuários finais.

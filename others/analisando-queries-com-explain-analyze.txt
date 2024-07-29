@@ -1,0 +1,50 @@
+Analisando queries com explain analyze
+
+Uma outra maneira de avaliar consultas no banco de dados é com a utilização dos comandos explain e explain analyze,
+que são suportados pelo MySQL e tem como objetivo fornecer informações sobre uma determinada query SQL.
+
+O comando explain
+
+O comando explain é uma ferramenta do MySQL, que também é suportada por alguns outros bancos de dados,
+que fornece informações detalhadas sobre como o otimizador de consultas do banco de dados executa uma determinada consulta SQL.
+Ao usar o comando explain, podemos visualizar o plano de execução de uma determinada consulta, incluindo quais índices
+estão sendo usados, quantas linhas estão sendo examinadas e outras métricas importantes.
+
+Para utilizar esse comando, basta preceder a consulta que deseja analisar com a palavra-chave explain. Por exemplo:
+
+explain select * from ingressos where descricao = 'CADEIRA';
+
+Após executar o comando explain, o MySQL retornará uma tabela com várias colunas, cada uma fornecendo informações
+específicas sobre como a consulta será executada. Alguns dos campos mais importantes incluem:
+
+- select_type: O tipo de consulta que está sendo executada (por exemplo, SIMPLE para uma consulta simples ou SUBQUERY para uma subconsulta);
+
+- type: O tipo de junção usado para acessar a tabela (por exemplo, ALL para uma varredura de tabela completa ou INDEX para um acesso de índice);
+
+- rows: O número estimado de linhas que serão examinadas para executar a consulta;
+
+- key: O índice usado para acessar a tabela (se aplicável).
+
+Ao analisar o resultado do comando explain, podemos identificar consultas que estão consumindo muitos recursos ou que
+poderiam ser executadas de forma mais eficiente. Por exemplo, consultas que exigem uma varredura de tabela completa (type = ALL)
+ou um número muito grande de linhas examinadas podem indicar oportunidades de otimização, como a criação de novos índices
+ou a revisão da estrutura da consulta.
+
+O comando explain analyze
+
+Outro comando complementar ao explain é o explain analyze, que executa a consulta e fornece informações sobre o tempo de
+execução de cada etapa do plano de execução. Isso permite uma análise mais detalhada do desempenho da consulta e pode nos
+ajudar a identificar gargalos de desempenho e otimizar consultas de forma mais eficaz.
+
+explain analyze select * from ingressos where descricao = 'CADEIRA';
+
+A diferença em relação a executar o comando apenas com o explain, é que ao utilizar o analyze, o MySQL executa a consulta
+e registra estatísticas detalhadas sobre cada etapa do plano de execução. Isso inclui informações como o tempo gasto em
+cada etapa, o número de linhas processadas e quaisquer operações adicionais realizadas, como classificações ou junções.
+
+Podemos com isso identificar pontos críticos que afetam o desempenho da consulta, o que pode incluir operações de join ou
+classificação que exigem uma quantidade significativa de recursos, ou varreduras de tabela que processam um grande número
+de linhas desnecessariamente.
+
+Ambos os comandos são excelentes ferramentas que podemos utilizar para analisar o desempenho de determinadas queries de
+nossa aplicação, nos auxiliando a identificar possíveis problemas que podem impactar a performance da aplicação.
