@@ -1,0 +1,26 @@
+Cuidados ao utilizar cache
+
+Embora o cache seja um recurso valioso que pode melhorar significativamente o desempenho de uma aplicação, é importante
+tomar alguns cuidados ao utilizá-lo. Aplicar cache em todas as consultas da aplicação pode não ser a melhor abordagem,
+podendo inclusive prejudicar a performance dela.
+
+Considerações para o uso de cache
+
+Aqui estão alguns cuidados importantes a serem considerados ao utilizar cache:
+
+- Seleção de dados: Nem todas as consultas da aplicação se beneficiam do uso de cache. Consultas que retornam dados que
+mudam frequentemente ou consultas que envolvem operações de escrita não são bons candidatos para cache. É importante
+selecionar cuidadosamente quais consultas serão cacheadas para evitar inconsistências nos dados e sobrecarga desnecessária no sistema.
+
+- Tamanho e expiração do cache: É importante definir um tamanho máximo para o cache e um tempo de expiração adequado
+para os objetos em cache. Um cache muito grande pode consumir muita memória e afetar o desempenho do sistema, enquanto
+um tempo de expiração muito longo pode resultar em dados desatualizados sendo servidos aos usuários.
+
+- Monitoramento: Monitorar o uso do cache e sua eficácia é fundamental para garantir que ele esteja cumprindo seu propósito.
+
+- Testes: Realizar testes é essencial para determinar o impacto do cache na aplicação. Testar diferentes configurações de
+cache e cenários de uso pode ajudar a identificar problemas de desempenho e ajustar as configurações do cache conforme necessário.
+
+O cache é uma ferramenta muito útil para melhorar a performance de uma aplicação, mas deve ser utilizado com cautela.
+É importante avaliar cuidadosamente quais consultas podem se beneficiar do cache e ajustar as configurações do cache
+de acordo com as necessidades específicas da aplicação.

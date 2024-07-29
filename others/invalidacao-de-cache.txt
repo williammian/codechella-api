@@ -1,0 +1,24 @@
+Invalidação de cache
+
+Além da invalidação de cache manual, ao inserir, atualizar ou excluir registros no banco de dados,
+existem outras estratégias de invalidação de cache:
+
+- Timeout: Definir um tempo de expiração para os objetos em cache. Após o tempo definido, os objetos são automaticamente
+removidos do cache e uma nova consulta ao banco de dados é feita para recuperar os dados atualizados.
+
+- Tamanho do cache: Limitar o número máximo de objetos que podem ser armazenados em cache. Quando o limite é atingido,
+os objetos menos utilizados são removidos para dar lugar aos novos.
+
+Políticas de invalidação de Cache
+
+As políticas de invalidação de cache determinam como os objetos são selecionados para remoção quando há necessidade de
+liberar espaço no cache. Duas das políticas mais comuns são:
+
+- Least Frequently Used (LFU - Menos Frequente Utilizado): Esta política remove os objetos que foram acessados com menos
+frequência. Ou seja, se um objeto não foi acessado recentemente, é mais provável que seja removido do cache.
+
+- Least Recently Used (LRU - Menos Recentemente Utilizado): Esta política remove os objetos que foram acessados menos
+recentemente. Ou seja, se um objeto não foi acessado por um longo período de tempo, é mais provável que seja removido do cache.
+
+Ao escolher uma política de invalidação de cache, é importante considerar as características específicas da aplicação e
+dos dados em cache, garantindo que a política selecionada otimize a utilização de recursos e melhore o desempenho geral da aplicação.
