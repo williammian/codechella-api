@@ -1,0 +1,35 @@
+Limitando recursos dos containers
+
+Foi utilizado o Docker e o Docker Compose para criar uma infraestrutura de containers composta pelo Nginx,
+atuando como balanceador de carga, duas instâncias da aplicação, um servidor Redis para cache e o banco de dados MySQL.
+No entanto, não foi configurada nenhuma limitação quanto ao uso de CPU e memória de tais containers.
+
+É importante ressaltar que não limitar os recursos dos containers não é uma prática recomendada, pois sem limites,
+eles podem consumir todos os recursos disponíveis no host, o que pode levar a problemas de desempenho e até mesmo à
+paralisação do sistema como um todo.
+
+Limitar os recursos dos containers é essencial para garantir um ambiente de execução estável e previsível.
+Ao definir limites para CPU e memória, você evita que um único container monopolize todos os recursos do host,
+garantindo que outros containers e aplicativos em execução no mesmo host continuem funcionando de forma adequada.
+
+Limitando recursos
+
+No Docker, é possível limitar os recursos de CPU e memória de um contêiner usando as opções --cpu e --memory ao criar ou
+executar um container. Por exemplo, para limitar um container a utilizar no máximo 1 núcleo de CPU e 512MB de memória,
+você pode usar o seguinte comando:
+
+docker run --cpu 1 --memory 512m nginx
+
+Também é possível definir limites de recursos no arquivo docker-compose.yml usando as opções cpu_limit e mem_limit:
+
+redis:
+  image: redis:7.2.4
+  restart: unless-stopped
+  deploy:
+    resources:
+      limits:
+        cpus: '1'
+        memory: 512M
+
+Ao definir esses limites, você garante que cada container tenha acesso apenas aos recursos especificados, impedindo que
+eles afetem negativamente o desempenho de outros containers e aplicativos em execução no mesmo host.

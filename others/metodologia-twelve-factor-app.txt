@@ -1,0 +1,68 @@
+Metodologia Twelve-Factor App
+
+A metodologia Twelve-Factor App é um conjunto de práticas recomendadas para o desenvolvimento de aplicações modernas,
+projetada para criar sistemas robustos, escaláveis e fáceis de manter.
+
+Foi criada por Adam Wiggins em 2011 e tem como objetivo fornecer um conjunto de princípios que abordam diferentes
+aspectos do desenvolvimento de software, desde a arquitetura da aplicação até a implantação e operação em escala.
+
+Princípios
+
+A metodologia Twelve-Factor App é dividida em 12 princípios:
+
+1.Codebase (Código-fonte único): Uma aplicação deve ser armazenada em um único repositório de código,
+com múltiplas implantações derivadas do mesmo código-base.
+
+2.Dependencies (Dependências explícitas): Todas as dependências da aplicação, incluindo bibliotecas e ferramentas
+de sistema, devem ser declaradas explicitamente e gerenciadas de forma isolada.
+
+3.Config (Configurações): As configurações da aplicação devem ser armazenadas em variáveis de ambiente,
+não no código-fonte, para permitir a configuração flexível em diferentes ambientes.
+
+4.Backing Services (Serviços de Back-end): Os serviços de back-end, como bancos de dados e filas,
+devem ser tratados como recursos externos, acessíveis por meio de interfaces padrão.
+
+5.Build, Release, Run (Construir, entregar, executar): O processo de build, entrega e execução da aplicação deve ser
+separado em etapas distintas, com cada etapa tendo suas próprias responsabilidades e garantindo a consistência entre ambientes.
+
+6.Processes (Processos): As aplicações devem ser executadas como processos independentes, leves e sem estado (Stateless),
+para facilitar a escalabilidade e a resiliência.
+
+7.Port Binding (Ligação de porta): As aplicações devem ser autocontidas e expor serviços por meio de portas, para que
+possam ser facilmente conectados a outras aplicações e serviços.
+
+8.Concurrency (Concorrência): As aplicações devem escalar horizontalmente, adicionando instâncias concorrentes para
+lidar com cargas de trabalho aumentadas.
+
+9.Disposability (Descartabilidade): As aplicações devem ser fáceis de iniciar e parar rapidamente, sem impacto para
+outras partes do sistema, para facilitar o deploy e a atualização contínua.
+
+10.Dev/Prod Parity (Paridade dev/prod): Os ambientes de desenvolvimento, testes e produção devem ser o mais semelhantes
+possível, para minimizar diferenças e evitar problemas de compatibilidade.
+
+11.Logs (Registros): As aplicações devem produzir logs estruturados e acessíveis por meio de interfaces padronizadas,
+para facilitar a depuração e o monitoramento.
+
+12.Admin Processes (Processos de administração): As tarefas administrativas, como migrações de banco de dados e limpeza
+de caches, devem ser executadas como processos únicos e rastreáveis.
+
+Motivação
+
+A metodologia Twelve-Factor App foi desenvolvida como resposta aos desafios enfrentados pelos times de desenvolvimento
+de software ao criar e realizar deploy de aplicações em ambientes de computação em nuvem. Até então, muitas práticas de
+desenvolvimento de software estavam enraizadas em abordagens monolíticas e tradicionais, que não se adequavam às demandas
+de agilidade, escalabilidade e resiliência exigidas por aplicações distribuídas e em ambientes cloud.
+
+A necessidade de uma metodologia mais moderna e flexível se tornou evidente à medida que as equipes de desenvolvimento
+buscavam maneiras de criar aplicações que pudessem ser facilmente escaladas e mantidas em ambientes de produção dinâmicos,
+com mudanças e evoluções constantes.
+
+Importância
+
+A metodologia Twelve-Factor App é essencial para projetar arquiteturas escaláveis, pois fornece diretrizes claras para
+criar aplicações modulares, flexíveis e fáceis de escalar. Ao adotar os princípios dessa metodologia, as equipes de
+desenvolvimento podem garantir que suas aplicações sejam projetadas com escalabilidade em mente desde o início,
+facilitando a adaptação a picos de demanda e suportando um crescimento contínuo de usuários.
+
+Além disso, as aplicações são mais fáceis de manter, atualizar e operar em produção, reduzindo a complexidade e os
+custos operacionais ao longo do tempo.

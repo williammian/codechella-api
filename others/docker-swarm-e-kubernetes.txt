@@ -1,0 +1,33 @@
+Docker Swarm e Kubernetes
+
+Todo o deploy e configuração da infraestrutura da aplicação foi feito em uma única instância EC2 da AWS.
+Foi mencionado que essa abordagem foi utilizada para fins didáticos, porém, em um ambiente real,
+o ideal seria que cada container estivesse em um servidor distinto, para mitigar o risco de toda a
+aplicação ficar fora do ar caso ocorra algum problema com o servidor EC2.
+
+Uma alternativa viável para alcançar esse nível de distribuição e escalabilidade é utilizar ferramentas de
+orquestração de containers, como o Docker Swarm e o Kubernetes.
+
+Docker Swarm
+
+O Docker Swarm é uma ferramenta de orquestração de containers nativa do Docker, projetada para simplificar o
+processo de implantação, escalonamento e gerenciamento de aplicações distribuídas em um cluster de hosts Docker.
+Com o Docker Swarm, é possível agrupar vários hosts Docker em um cluster e realizar o deploy de aplicações em
+containers de forma transparente, distribuindo a carga de trabalho entre os nós do cluster.
+
+O Docker Swarm foi projetado para ser simples de usar e integrar-se perfeitamente ao ecossistema Docker existente.
+É uma escolha popular para equipes que estão começando com a orquestração de containers
+ou que preferem uma solução mais simples e direta.
+
+Kubernetes
+
+Kubernetes, também conhecido como K8s, é uma plataforma de código aberto para automatizar o deploy,
+o escalonamento e a operação de aplicações em containers.
+Desenvolvido pelo Google e lançado como projeto de código aberto em 2014, o Kubernetes oferece
+recursos avançados de gerenciamento de containers, incluindo escalonamento automático, auto-recuperação,
+atualizações de aplicações sem tempo de inatividade e muito mais. Kubernetes é amplamente adotado pela
+comunidade de desenvolvimento de software e é considerado uma solução robusta para ambientes de produção.
+
+O Kubernetes oferece recursos mais avançados e flexibilidade para ambientes de produção complexos.
+Com sua arquitetura altamente escalável e extensível, Kubernetes é amplamente adotado por empresas
+de todos os tamanhos para implantar e gerenciar aplicações em containers em alta escala.

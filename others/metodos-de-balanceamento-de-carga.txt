@@ -1,0 +1,69 @@
+Métodos de balanceamento de carga
+
+Foi utilizado o Nginx como servidor de proxy reverso para balancear a carga entre diferentes instâncias da aplicação.
+Uma configuração básica foi realizada com duas instâncias da aplicação sendo executadas e o Nginx distribuindo as
+requisições entre elas. No entanto, não foi configurada explicitamente a estratégia de balanceamento de carga,
+resultando na utilização da estratégia padrão de round-robin.
+
+Estratégias de balanceamento de carga
+
+O Nginx suporta diversas estratégias de balanceamento de carga, permitindo personalizar o comportamento de distribuição
+das requisições entre os servidores backend. Algumas das estratégias mais comuns são:
+
+- Round Robin: Esta é a estratégia padrão do Nginx. O Nginx distribui as requisições de forma sequencial entre os
+servidores backend, garantindo que cada servidor receba uma quantidade igual de requisições ao longo do tempo.
+
+- Least Connections (Menor número de conexões): Esta estratégia direciona as requisições para o servidor com o menor
+número de conexões ativas no momento. É útil quando os servidores backend têm capacidades diferentes ou quando o tempo
+de resposta pode variar entre os servidores.
+
+- IP Hash (Hash do endereço IP do cliente): Com esta estratégia, o Nginx calcula um hash do endereço IP do cliente e
+usa esse valor para determinar para qual servidor enviar a requisição. Isso garante que todas as requisições de um mesmo
+cliente sejam enviadas para o mesmo servidor, útil para manter a consistência em aplicações que requerem sessões persistentes.
+
+- Least Time (Menor tempo de resposta): O Nginx direciona as requisições para o servidor que teve o menor tempo de resposta
+em um determinado período de tempo. Esta estratégia é útil para otimizar o desempenho da aplicação, enviando requisições
+para os servidores mais rápidos disponíveis.
+
+Exemplo de configuração
+
+A configuração da estratégia de balanceamento de carga é feita no arquivo de configuração do Nginx.
+A seguir temos um exemplo de como configurar a estratégia de balanceamento de carga Least Connections:
+
+--------------------------------------------------------------------------------------------------------
+
+  upstream servers {
+    least_conn;
+    server app-1:8080 weight=1;
+    server app-2:8080 weight=2;
+  }
+
+  server {
+    listen 80;
+    location / {
+        proxy_pass http://servers;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        add_header X-Backend-Server $upstream_addr;
+
+  }
+}
+
+-------------------------------------------------------------------------------------------------------
+
+Neste exemplo anterior, configuramos a estratégia least_conn para distribuir as requisições para o servidor com o
+menor número de conexões ativas no momento. Os servidores app-1 e app-2 são especificados dentro da diretiva upstream,
+com weight=1 atribuído ao primeiro servidor e weight=2 atribuído ao segundo servidor, indicando que o segundo servidor
+deve receber o dobro de requisições em comparação ao primeiro devido ao seu maior peso.
+
+Escolhendo a estratégia adequada
+
+A escolha da estratégia de balanceamento de carga depende das características específicas da aplicação e dos requisitos
+de desempenho. É importante considerar fatores como a carga de trabalho esperada, a capacidade dos servidores backend,
+o tempo de resposta desejado e a necessidade de persistência de sessão ao selecionar a estratégia mais adequada.
+
+Ao experimentar diferentes estratégias de balanceamento de carga e ajustar as configurações conforme necessário,
+é possível otimizar o desempenho da aplicação e garantir uma distribuição eficiente das requisições entre os servidores backend.
